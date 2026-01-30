@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bernard "The Head Hunter" Radin</title>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&display=swap" rel="stylesheet">
+
+  <style>
+    body,html{margin:0;padding:0;font-family:Arial, sans-serif;background:#000;color:#fff;scroll-behavior:smooth;}
+    
+    .datetime-display {
+      position: absolute;
+      top: 30px;
+      right: 40px;
+      z-index: 100;
+      text-align: right;
+      font-family: 'Courier New', Courier, monospace;
+      text-transform: uppercase;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+    }
+    .time-text {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #fff;
+      display: block;
+      letter-spacing: 2px;
+    }
+    .date-text {
+      font-size: 0.9rem;
+      color: #e00000; /* Red accent */
+      letter-spacing: 1px;
+    }
+
+    header{height:100vh;position:relative;overflow:hidden;}
+    
+    header video{
+        position:absolute;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        object-fit:cover;
+        filter:brightness(40%);
+        z-index: 0;
+    }    
+    
+    .hero-text {
+      position: absolute;
+      bottom: 25%; 
+      left: 0;
+      right: 0;
+      margin-left: auto;
+      margin-right: auto;
+      width: 100%;
+      text-align: center;
+      z-index: 10;
+      padding: 0 20px;
+      box-sizing: border-box; 
+    }
+    
+    .hero-text h1 {
+      font-size: 3rem;
+      letter-spacing: 3px;
+      font-weight: 900;
+      line-height: 1.2;
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    .nickname {
+      display: block;
+      font-family: 'Cinzel', serif;
+      font-size: 4.5rem;
+      color: #e00000;
+      text-shadow: 0 0 20px rgba(224, 0, 0, 0.6);
+      margin: 10px 0;
+    }
+
+    .hero-text h2{
+        font-size:1.5rem;
+        margin-top:20px;
+        letter-spacing:2px; 
+        opacity: 0.9;
+        text-transform: uppercase;
+    }
+
+    section{padding:100px 10%;}
+    .stats-container{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;text-align:center;}
+    .stat-box{padding:30px;background:#111;border-radius:15px;transition:0.3s;}
+    .stat-box:hover{transform:scale(1.05);background:#181818;}
+    
+    h1.section-title{text-transform:uppercase;font-size:3rem;margin-bottom:40px;text-align:center;}
+
+    .timeline{position:relative;margin:50px auto;padding-right:30px;border-left:3px solid #9b0000;}
+    .timeline-entry{margin-bottom:40px;padding-left:20px;}
+    .timeline-entry h3{color:#e00000;margin-bottom:5px;}
+    
+    .timeline-entry {
+      position: relative;
+      padding: 40px 30px;
+      border-radius: 15px;
+      background: #111;
+      overflow: hidden;
+    }
+
+    .timeline-entry::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: var(--bg);
+      background-size: cover;
+      background-position: center;
+      opacity: 0.40; 
+      filter: grayscale(100%) contrast(120%);
+      z-index: 0;
+    }
+
+    /* dark overlay for readability */
+    .timeline-entry::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(0,0,0,0.9),
+        rgba(0,0,0,0.7)
+      );
+      z-index: 1;
+    }
+
+    .timeline-entry h3,
+    .timeline-entry p {
+      position: relative;
+      z-index: 2;
+    }
+
+    .timeline-entry p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+    }
+
+    .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;}
+    .gallery img{width:100%;height:300px;object-fit:cover;border-radius:10px;transition:0.3s;}
+    .gallery img:hover{transform:scale(1.05);}
+    
+    footer{text-align:center;padding:40px;background:#111;margin-top:80px;font-size:0.9rem;letter-spacing:1px; border-top: 1px solid #333;}
+
+    #bio p, #life p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      max-width: 1200px;
+      margin: 0 auto 25px;
+    }
+
+    #achievements ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    #achievements li {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      margin-bottom: 18px;
+      position: relative;
+      padding-left: 25px;
+    }
+
+    #achievements li::before {
+      content: "◆";
+      color: #e00000;
+      position: absolute;
+      left: 0;
+    }
+
+    .center-wrapper {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .memory-button {
+      position: relative;
+      width: 320px;
+      height: 120px;
+      border-radius: 20px;
+      text-decoration: none;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background:
+        linear-gradient(145deg, rgba(60,0,0,0.8), rgba(10,0,0,0.95)),
+        url("images/grain.png");
+      background-size: cover;
+      box-shadow:
+        0 0 0 2px rgba(255,255,255,0.05),
+        0 40px 120px rgba(255,0,0,0.35);
+      overflow: hidden;
+
+      opacity: 0;
+      transform: translateY(40px) scale(0.95);
+      transition: box-shadow 0.4s ease, transform 0.3s ease;
+    }
+
+    .memory-text {
+      font-size: 1.4rem;
+      letter-spacing: 4px;
+      font-weight: 800;
+      z-index: 2;
+      text-shadow: 0 0 15px rgba(255,0,0,0.6);
+    }
+
+    .memory-sub {
+      font-size: 0.7rem;
+      letter-spacing: 3px;
+      opacity: 0.7;
+      margin-top: 6px;
+      z-index: 2;
+    }
+
+    .memory-noise {
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(
+          0deg,
+          rgba(255,255,255,0.03),
+          rgba(255,255,255,0.03) 1px,
+          transparent 1px,
+          transparent 3px
+        );
+      animation: noiseMove 0.2s infinite;
+      mix-blend-mode: overlay;
+      z-index: 1;
+    }
+
+    .memory-button:hover {
+      box-shadow:
+        0 0 0 2px rgba(255,0,0,0.4),
+        0 50px 150px rgba(255,0,0,0.6);
+    }
+
+    .memory-button:hover .memory-noise {
+      animation-play-state: paused;
+    }
+
+    .memory-button:active {
+      transform: scale(0.95);
+    }
+
+    @keyframes noiseMove {
+      from { background-position: 0 0; }
+      to { background-position: 0 100%; }
+    }
+
+    .youtube-section{
+      padding:120px 8%;
+      display:flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content:center;
+    }
+
+    .youtube-frame{
+      position:relative;
+      width:100%;
+      max-width:1100px;
+      aspect-ratio:16/9;
+      border-radius:24px;
+      overflow:hidden;
+      background:#000;
+      box-shadow:
+        0 0 0 2px rgba(255,255,255,0.05),
+        0 40px 120px rgba(255,0,0,0.35);
+      animation:ytBreath 6s ease-in-out infinite;
+    }
+
+    @keyframes ytBreath{
+      0%,100%{
+        box-shadow:
+          0 0 0 2px rgba(255,255,255,0.05),
+          0 40px 120px rgba(255,0,0,0.25);
+      }
+      50%{
+        box-shadow:
+          0 0 0 2px rgba(255,0,0,0.25),
+          0 60px 160px rgba(255,0,0,0.45);
+      }
+    }
+
+    .youtube-frame::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(
+          to top,
+          rgba(0,0,0,0.85),
+          rgba(0,0,0,0.2),
+          rgba(0,0,0,0.85)
+        );
+      pointer-events:none;
+      z-index:1;
+    }
+
+    .youtube-frame iframe{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      border:none;
+    }
+
+    .life-links {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 40px;
+        flex-wrap: wrap;
+    }
+
+    .life-btn {
+        text-decoration: none;
+        color: #fff;
+        background: #111;
+        padding: 20px 40px;
+        border-radius: 10px;
+        border: 1px solid #333;
+        transition: 0.3s;
+        text-align: center;
+        min-width: 200px;
+    }
+
+    .life-btn h3 {
+        margin: 0;
+        font-family: 'Cinzel', serif;
+        color: #e00000;
+        font-size: 1.2rem;
+    }
+
+    .life-btn span {
+        font-size: 0.9rem;
+        color: #888;
+        display: block;
+        margin-top: 5px;
+    }
+
+    .life-btn:hover {
+        transform: translateY(-5px);
+        background: #181818;
+        border-color: #e00000;
+        box-shadow: 0 10px 30px rgba(224, 0, 0, 0.2);
+    }
+    
+    .archive-link {
+        margin-top: 30px;
+        color: #888;
+        text-decoration: none;
+        font-family: 'Cinzel', serif;
+        border-bottom: 1px solid #e00000;
+        padding-bottom: 5px;
+        transition: 0.3s;
+    }
+    .archive-link:hover {
+        color: #e00000;
+    }
+
+    @media (max-width: 768px) {
+        .datetime-display {
+            top: 20px;
+            right: 20px;
+        }
+        .time-text { font-size: 1.2rem; }
+        .nickname { font-size: 2.5rem; }
+        .stats-container { grid-template-columns: 1fr 1fr; }
+        .gallery { grid-template-columns: 1fr; }
+    }
+
+  </style>
+
+</head>
+<body>
+
+  <header>
+    <video autoplay muted loop>
+      <source src="website background.mp4" type="video/mp4">
+    </video>
+    
+    <div class="datetime-display">
+        <span id="current-time" class="time-text">00:00:00</span>
+        <span id="current-date" class="date-text">DATE LOADING...</span>
+    </div>
+
+    <div class="hero-text" data-aos="fade-up" data-aos-duration="1500">
+      <h1>
+          Bernard <br>
+          <span class="nickname">"The Head Hunter"</span>
+          Radin
+      </h1>
+      <h2>Muay Thai • Taekwondo • Wushu Sanshou Champion</h2>
+    </div>
+  </header>
+
+<section id="bio" data-aos="fade-up" data-aos-duration="1500">
+<h1 class="section-title">Biography</h1>
+<p>Born on 5 April 1972 in Sarawak, Bernard Radin—also known as "The Head Hunter"—stands as one of Malaysia’s most decorated multi-disciplinary martial artists. Holding Iban and German heritage, he grew up in a longhouse in Roban, Sarikei, surrounded by ancestral warrior traditions. His fighting name reflects the legendary Iban warrior customs of headhunting, symbolising bravery and fearlessness.</p>
+<p>Standing at 5'7" and competing at 70kg, he built a fierce reputation in Muay Thai, Taekwondo, and Chinese Kickboxing. With a record of 45 fights, 40 wins, and 32 knockouts, Bernard earned a place among Malaysia’s greatest fighters.</p>
+</section>
+
+  <section id="stats" data-aos="fade-up" data-aos-duration="1500">
+    <h1 class="section-title">Career Statistics</h1>
+    <div class="stats-container">
+      <div class="stat-box" data-aos="zoom-in"><h2>45</h2><p>Total Fights</p></div>
+      <div class="stat-box" data-aos="zoom-in"><h2>40</h2><p>Wins</p></div>
+      <div class="stat-box" data-aos="zoom-in"><h2>32</h2><p>Knockouts</p></div>
+      <div class="stat-box" data-aos="zoom-in"><h2>5</h2><p>Losses</p></div>
+    </div>
+  </section>
+
+<section id="achievements" data-aos="fade-up" data-aos-duration="1500">
+  <h1 class="section-title">Achievements</h1>
+  <ul class="achievements-list">
+    <li>World Championship Taekwon-do Silver & Bronze Medalist</li>
+    <li>SEA Games Wushu Sanshou (Chinese Kickboxing) Medalist</li>
+    <li>Undefeated National Wushu & Taekwondo Champion since 1991</li>
+    <li>Malaysian Kickboxing Champion 2001 & 2003</li>
+    <li>Malaysian Ultimate Warrior Champion 2007</li>
+  </ul>
+</section>
+
+<section id="timeline" data-aos="fade-right" data-aos-duration="1500">
+  <h1 class="section-title">Match History Timeline</h1>
+  <div class="timeline">
+
+    <div class="timeline-entry" data-aos="fade-right" style="--bg:url('images/1991.jpg')">
+      <h3>1991</h3>
+      <p>Became undefeated national Wushu & Taekwondo champion.</p>
+    </div>
+
+    <div class="timeline-entry" data-aos="fade-right" style="--bg:url('images/taekwondo.png')">
+      <h3>1994</h3>
+      <p>Won Bronze at International Taekwondo Federation Championship.</p>
+    </div>
+
+    <div class="timeline-entry" data-aos="fade-right" style="--bg:url('images/104102399_10224191560241195_8537377036633032601_n.jpg')">
+      <h3>1999</h3>
+      <p>Won Silver at ITF Championship & SEA Games Bronze (Sanshou).</p>
+    </div>
+
+    <div class="timeline-entry" data-aos="fade-right" style="--bg:url('images/kickboxing.jpg')">
+      <h3>2001</h3>
+      <p>Malaysian Kickboxing Champion & SEA Games Bronze Medalist.</p>
+    </div>
+
+    <div class="timeline-entry" data-aos="fade-right" style="--bg:url('Images/586059126_10241899304163726_7574687195894590175_n.jpg')">
+      <h3>2003</h3>
+      <p>Malaysian Kickboxing Champion (again).</p>
+    </div>
+
+    <div class="timeline-entry" data-aos="fade-right" style="--bg:url('Images/505144368_10239173971832121_4719299718688257343_n.jpg')">
+      <h3>2007</h3>
+      <p>Crowned Malaysian Ultimate Warrior Champion.</p>
+    </div>
+
+  </div>
+</section>
+
+<section class="youtube-section" data-aos="fade-up" data-aos-duration="1500">
+    <div class="youtube-frame">
+        <iframe 
+            width="560" 
+            height="315" 
+            src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=PlaceholderVideo" 
+            title="Bernard Radin Fight Highlights" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            allowfullscreen>
+        </iframe>
+    </div>
+    <a href="fighting.html" class="archive-link">>>> ENTER FIGHT ARCHIVES <<<</a>
+</section>
+
+<section id="life" data-aos="fade-up" data-aos-duration="1500">
+    <h1 class="section-title">Life Beyond Fighting</h1>
+    <p>After an intense career in combat sports, Bernard now dedicates his time to coaching and community work. He trains children, families, and even troubled youths, using martial arts as a tool for discipline and self-respect. Outside the gym, Bernard spends time fishing with his friends, enjoying the calm contrast to his fighting past.</p>
+    
+    <div class="life-links">
+        <a href="coaching.html" class="life-btn" data-aos="fade-right">
+            <h3>Coaching Legacy</h3>
+            <span>The Gym & The Future</span>
+        </a>
+        <a href="hobby.html" class="life-btn" data-aos="fade-left">
+            <h3>Life & Hobbies</h3>
+            <span>Fishing & BBQ</span>
+        </a>
+    </div>
+</section>
+
+<div class="center-wrapper">
+  <a href="gallery.html"
+     class="memory-button"
+     data-aos="fade-up"
+     data-aos-duration="2000"
+     data-aos-easing="ease-out-quart"
+     data-aos-delay="200"
+     data-aos-once="true">
+
+    <span class="memory-noise"></span>
+    <span class="memory-text">DISCOVER MEMORY</span>
+    <span class="memory-sub">ARCHIVED PHOTOS</span>
+
+  </a>
+</div>
+
+
+<footer>
+  <p>© 2026 Bernard Ak Radin. This website was developed to fulfill the requirement of IMD318</p>
+
+  <p>
+    <a href="https://www.facebook.com/bernard.radin/" target="_blank">
+      <img src="images/fbicon.png" alt="Facebook icon" width="30" height="30">
+    </a>
+  </p>
+
+  <p>
+    <a href="https://bernardradin.blogspot.com/2008/05/fighter-profile.html" target="_blank">
+      <img src="images/Blogger.png" alt="Blogger icon" width="30" height="30">
+    </a>
+  </p>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init();
+
+  // TIME AND DATE SCRIPT
+  function updateClock() {
+    const now = new Date();
+    
+    // Time Formatting
+    const timeString = now.toLocaleTimeString('en-US', { 
+        hour12: false, 
+        hour: '2-digit', 
+        minute: '2-digit', 
+        second: '2-digit' 
+    });
+    
+    // Date Formatting
+    const dateString = now.toLocaleDateString('en-GB', { 
+        weekday: 'long', 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+    });
+
+    document.getElementById('current-time').textContent = timeString;
+    document.getElementById('current-date').textContent = dateString.toUpperCase();
+  }
+
+  // Update immediately then every second
+  updateClock();
+  setInterval(updateClock, 1000);
+</script>
+</body>
+</html>

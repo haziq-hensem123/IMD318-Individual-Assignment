@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bernard Radin | Life & Hobbies</title>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Oswald:wght@300;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+        --bg-color: #0d0d0d;
+        --accent: #ff6b35; /* Campfire Orange */
+        --text-color: #e0e0e0;
+    }
+
+    body, html {
+        margin: 0;
+        padding: 0;
+        font-family: 'Arial', sans-serif;
+        background: var(--bg-color);
+        color: var(--text-color);
+        overflow-x: hidden;
+    }
+
+    /* NAV BACK BUTTON */
+    .nav-back {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 100;
+        text-decoration: none;
+        color: #fff;
+        font-family: 'Oswald', sans-serif;
+        border: 2px solid var(--accent);
+        padding: 10px 25px;
+        border-radius: 50px;
+        background: rgba(0,0,0,0.8);
+        transition: 0.3s;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+    .nav-back:hover {
+        background: var(--accent);
+        color: #000;
+    }
+
+    /* HEADER */
+    header {
+        height: 60vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        /* Note: Using mancing.jpg as header bg or just a dark texture */
+        background-size: cover;
+        background-position: center;
+        border-bottom: 4px solid var(--accent);
+    }
+
+    h1 {
+        font-family: 'Cinzel', serif;
+        font-size: 4rem;
+        text-transform: uppercase;
+        margin: 0;
+        text-shadow: 0 4px 15px rgba(0,0,0,0.9);
+    }
+    
+    h2.subtitle {
+        font-family: 'Oswald', sans-serif;
+        color: var(--accent);
+        letter-spacing: 4px;
+        font-weight: 300;
+    }
+
+    /* FISHING SECTION */
+    section { padding: 80px 10%; }
+
+    .fishing-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px;
+        align-items: center;
+        margin-bottom: 100px;
+    }
+
+    .fishing-text { flex: 1; min-width: 300px; }
+    .fishing-text h2 { font-family: 'Cinzel'; font-size: 2.5rem; color: var(--accent); }
+    .fishing-text p { font-size: 1.1rem; line-height: 1.8; color: #ccc; }
+
+    .fishing-img-wrapper {
+        flex: 1;
+        min-width: 300px;
+        height: 400px;
+        border-radius: 20px;
+        overflow: hidden;
+        border: 2px solid var(--accent);
+        box-shadow: 0 0 30px rgba(255, 107, 53, 0.2);
+    }
+    
+    .fishing-img-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        /* FIX: This shifts the image focus to 30% from the top, effectively lowering the image to show more of the upper body/head */
+        object-position: center 30%; 
+        transition: 0.5s;
+    }
+    .fishing-img-wrapper:hover img { transform: scale(1.1); }
+
+    /* PKP PROJECT SECTION */
+    .project-title {
+        text-align: center;
+        font-family: 'Cinzel';
+        font-size: 3rem;
+        margin-bottom: 60px;
+        border-top: 1px solid #333;
+        padding-top: 60px;
+    }
+    .project-title span { color: var(--accent); }
+
+    .project-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+    }
+
+    .project-card {
+        background: #1a1a1a;
+        padding: 20px;
+        border-radius: 15px;
+        text-align: center;
+        transition: 0.3s;
+    }
+
+    .project-card:hover { transform: translateY(-10px); background: #222; }
+
+    .card-img {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        filter: grayscale(30%);
+    }
+
+    .project-card:hover .card-img { filter: grayscale(0%); }
+
+    .caption { font-family: 'Oswald'; font-size: 1.2rem; color: var(--accent); margin-bottom: 10px; }
+    .desc { font-size: 0.95rem; color: #999; line-height: 1.5; }
+
+    footer {
+        text-align: center;
+        padding: 40px;
+        margin-top: 50px;
+        border-top: 1px solid #333;
+        color: #555;
+    }
+
+  </style>
+</head>
+<body>
+
+    <a href="website.html" class="nav-back">← Back Home</a>
+
+    <header>
+        <div data-aos="fade-down" data-aos-duration="1500">
+            <h2 class="subtitle">
+            <h1>Hobby</h1>
+        </div>
+    </header>
+
+    <section>
+        <div class="fishing-container">
+            <div class="fishing-img-wrapper" data-aos="fade-right">
+                <img src="mancings.jpg" alt="Bernard Fishing">
+            </div>
+            <div class="fishing-text" data-aos="fade-left">
+                <h2>The River's Peace</h2>
+                <p>
+                    The ring is loud. The crowd screams, the bell rings, and the adrenaline spikes. But the river? The river demands silence. 
+                    I spend hours by the water, waiting for the strike. Fishing taught me a different kind of patience—not the patience of waiting for an opening to punch, but the patience to let nature come to you. 
+                    When I hold a fresh catch, I feel the same victory as lifting a belt, just… quieter.
+                </p>
+            </div>
+        </div>
+
+        <h2 class="project-title" data-aos="fade-up">The PKP <span>Iron Project</span></h2>
+        
+        <p style="text-align: center; max-width: 700px; margin: 0 auto 50px; color: #aaa;" data-aos="fade-up">
+            During the lockdown (PKP), fights were cancelled and gyms were closed. I couldn't sit still. 
+            So, I became an engineer. I decided to build grilling machine from scratch.
+        </p>
+
+        <div class="project-grid">
+            
+            <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+                <img src="first.jpg" class="card-img" alt="Beginning Construction">
+                <div class="caption">Phase 1: The Skeleton</div>
+                <div class="desc">
+                    Welding the frame. I didn't have blueprints, just an idea in my head. 
+                    Like a fight, you adjust your plan as you go.
+                </div>
+            </div>
+
+            <div class="project-card" data-aos="fade-up" data-aos-delay="300">
+                <img src="second.jpg" class="card-img" alt="Adding Wheels">
+                <div class="caption">Phase 2: The Mobility</div>
+                <div class="desc">
+                    I realized it was too heavy to move. So I improvised. 
+                    I scavenged old tires and built a custom trolley system. 
+                    Now the beast can roll anywhere.
+                </div>
+            </div>
+
+            <div class="project-card" data-aos="fade-up" data-aos-delay="500">
+                <img src="third.jpg" class="card-img" alt="Finished Product">
+                <div class="caption">Phase 3: The Beast</div>
+                <div class="desc">
+                    Completed. Painted. Ready for war. 
+                    It’s not just an oven; it’s a tank that cooks meat.
+                </div>
+            </div>
+
+            <div class="project-card" data-aos="fade-up" data-aos-delay="700">
+                <img src="salai.jpg" class="card-img" alt="Grilling">
+                <div class="caption">The Feast</div>
+                <div class="desc">
+                    The best part of building it? Using it. 
+                    Nothing beats the taste of Sarawakian style BBQ on a rig you built with your own hands.
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        © Bernard Radin 2025 - This website was developed to fulfill IMD318 requirement
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bernard Radin | Fight Archives</title>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@900&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+        margin: 0;
+        background: #000;
+        color: white;
+        font-family: Arial, sans-serif;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .back-arrow {
+        position: fixed;
+        top: 20px; left: 20px;
+        color: #fff;
+        font-size: 2rem;
+        text-decoration: none;
+        z-index: 100;
+        mix-blend-mode: difference;
+    }
+
+    header {
+        text-align: center;
+        padding: 80px 20px 20px;
+    }
+
+    h1 {
+        font-family: 'Cinzel', serif;
+        font-size: 3.5rem;
+        color: #e00000;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    /* Single Video Focus Layout */
+    .main-stage {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start; /* Aligns to top, but centered horizontally */
+        padding: 40px 5%;
+    }
+
+    .video-card {
+        background: #111;
+        border-radius: 15px;
+        overflow: hidden;
+        border: 2px solid #333;
+        transition: 0.3s;
+        width: 100%;
+        max-width: 900px; /* Bigger width for single video */
+        box-shadow: 0 0 50px rgba(0,0,0,0.8);
+    }
+    
+    .video-card:hover {
+        border-color: #e00000;
+        box-shadow: 0 0 60px rgba(224, 0, 0, 0.3);
+    }
+
+    .video-wrapper {
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+        height: 0;
+    }
+
+    .video-wrapper iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+
+    .video-info {
+        padding: 30px;
+        text-align: center;
+        background: linear-gradient(to top, #0a0a0a, #111);
+    }
+    .video-info h3 { 
+        margin: 0 0 10px; 
+        color: #fff; 
+        font-size: 2rem; 
+        font-family: 'Cinzel', serif;
+    }
+    .video-info p { 
+        margin: 0; 
+        color: #888; 
+        font-size: 1rem; 
+        letter-spacing: 1px;
+    }
+
+  </style>
+</head>
+<body>
+
+    <a href="website.html" class="back-arrow">←</a>
+
+    <header data-aos="fade-down">
+        <h1>The Archives</h1>
+        <p style="color: #666;">Witness the history of violence and technique.</p>
+    </header>
+
+    <div class="main-stage">
+
+        <div class="video-card" data-aos="zoom-in" data-aos-duration="1500">
+            <div class="video-wrapper">
+                <iframe 
+                    src="https://www.youtube.com/embed/3LSn_KF6vXw?si=quKoF6iHv0kC2Hzt" 
+                    title="Bernard Radin Highlights" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    referrerpolicy="strict-origin-when-cross-origin" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div class="video-info">
+                <h3>The Head Hunter in Action</h3>
+                <p>Official Highlight Reel • Vintage Footage</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script> AOS.init(); </script>
+</body>
+</html>

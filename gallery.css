@@ -1,0 +1,203 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: radial-gradient(circle at center, #111, #000);
+  height: 100vh;
+  overflow: hidden;
+  font-family: 'Montserrat', sans-serif;
+  color: white;
+}
+
+/* Entry fade */
+body.enter {
+  animation: fadeIn 1.2s ease forwards;
+  opacity: 0;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* Grain */
+.bg-noise {
+  position: fixed;
+  inset: 0;
+  background: url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* STAGE */
+.stage {
+  position: relative;
+  height: 75vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1400px;
+  z-index: 2;
+}
+
+/* Image wrapper for camera drift */
+.image-wrap {
+  animation: drift 12s ease-in-out infinite alternate;
+}
+
+@keyframes drift {
+  0% { transform: scale(1) translate(-6px, -4px); }
+  100% { transform: scale(1.08) translate(6px, 4px); }
+}
+
+.stage img {
+  max-width: 80vw;
+  max-height: 80vh;
+  border-radius: 22px;
+  box-shadow:
+    0 50px 120px rgba(0,0,0,0.8),
+    0 0 70px rgba(255,0,0,0.25);
+  transition: transform 0.8s cubic-bezier(.22,1,.36,1),
+              opacity 0.6s ease;
+}
+
+/* TEXT OVERLAY */
+.caption {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.caption h1 {
+  font-size: 42px;
+  letter-spacing: 5px;
+  text-shadow: 0 0 30px rgba(255,0,0,0.8);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: textIn 0.8s ease forwards;
+}
+
+.caption p {
+  margin-top: 10px;
+  font-size: 14px;
+  letter-spacing: 2px;
+  opacity: 0.7;
+}
+
+@keyframes textIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* THUMB STRIP */
+.thumbs {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  z-index: 4;
+}
+
+.thumb {
+  width: 120px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 12px;
+  cursor: pointer;
+  opacity: 0.5;
+  transform: scale(0.9);
+  transition: all 0.4s ease;
+}
+
+.thumb:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
+}
+
+.thumb.active {
+  opacity: 1;
+  transform: scale(1.15);
+  box-shadow:
+    0 0 30px rgba(255,0,0,0.7),
+    0 0 70px rgba(255,0,0,0.4);
+}
+
+/* FLASH */
+.flash {
+  position: fixed;
+  inset: 0;
+  background: white;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 999;
+  transition: opacity 0.3s ease;
+}
+
+.flash.active {
+  opacity: 1;
+}
+
+/* HOME BUTTON */
+.home-btn {
+  position: fixed;
+  top: 30px;
+  left: 30px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  border-radius: 14px;
+  cursor: pointer;
+  z-index: 10;
+
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.1);
+
+  box-shadow:
+    0 0 25px rgba(255,0,0,0.3),
+    inset 0 0 20px rgba(0,0,0,0.8);
+
+  transition: all 0.35s ease;
+}
+
+.home-btn .icon {
+  font-size: 20px;
+  color: #ff3b3b;
+  transition: transform 0.3s ease;
+}
+
+.home-btn .label {
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: white;
+  opacity: 0.8;
+}
+
+/* Hover = HUD wakes up */
+.home-btn:hover {
+  transform: translateX(-4px) scale(1.05);
+  box-shadow:
+    0 0 40px rgba(255,0,0,0.6),
+    inset 0 0 30px rgba(0,0,0,0.9);
+}
+
+.home-btn:hover .icon {
+  transform: translateX(-4px);
+}
+
+/* Click feedback */
+.home-btn:active {
+  transform: scale(0.95);
+}
